@@ -36,7 +36,6 @@ function FolderItem({ item, selected, onSingleClick, onDoubleClick }) {
   return (
     <button
       onClick={() => onSingleClick(item)}
-      onDoubleClick={() => onDoubleClick(item)}
       style={{
         display: 'flex',
         flexDirection: 'column',

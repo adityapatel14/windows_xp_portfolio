@@ -1,4 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
+
+// Lazy-load the heavy dashboard to avoid slowing initial bundle
+const InternshipDashboard = lazy(() =>
+  import("./Dashboard/InternshipDashboard")
+);
 
 // ── Image Carousel ─────────────────────────────────────────
 function Carousel({ images }) {
@@ -28,7 +33,6 @@ function Carousel({ images }) {
         alt=""
         style={{ width: "100%", height: 200, objectFit: "cover" }}
       />
-
       {images.length > 1 && (
         <>
           <button onClick={() => setIdx((idx - 1 + images.length) % images.length)}>‹</button>
@@ -39,10 +43,27 @@ function Carousel({ images }) {
   );
 }
 
+// ── Loading fallback (XP style) ───────────────────────────
+function DashboardLoading() {
+  return (
+    <div style={{
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      background: "#D4D0C8",
+      fontFamily: "Tahoma",
+      fontSize: 12,
+      color: "#444",
+      gap: 8,
+    }}>
+      <span>⏳</span> Loading dashboard...
+    </div>
+  );
+}
+
 // ── MAIN COMPONENT ─────────────────────────────────────────
 export default function ProjectViewer({ data }) {
-
-  // ❗ DIRECTLY USE DATA (NO SERVICE, NO SLUG)
   if (!data) {
     return (
       <div style={{ padding: 20, color: "red" }}>
@@ -51,26 +72,34 @@ export default function ProjectViewer({ data }) {
     );
   }
 
+  // ── Data-analysis projects → show interactive dashboard ──
+  if (data.type === "data-analysis") {
+    return (
+      <div style={{ height: "100%", overflow: "hidden" }}>
+        <Suspense fallback={<DashboardLoading />}>
+          <InternshipDashboard data={data} />
+        </Suspense>
+      </div>
+    );
+  }
+
+  // ── All other projects → original card view ───────────────
   return (
     <div style={{ padding: 16, fontFamily: "Tahoma", fontSize: 12 }}>
-
       {/* HEADER */}
       <div style={{
         background: "#245EDB",
         color: "#fff",
         padding: 10,
-        marginBottom: 10
+        marginBottom: 10,
       }}>
         <b>{data.title}.exe</b>
       </div>
 
-      {/* IMAGE */}
       <Carousel images={data.images} />
 
-      {/* DESCRIPTION */}
       <p style={{ marginTop: 10 }}>{data.description}</p>
 
-      {/* YOUR WORK */}
       {data.your_work && (
         <div>
           <b>Your Work:</b>
@@ -78,26 +107,22 @@ export default function ProjectViewer({ data }) {
         </div>
       )}
 
-      {/* TECH */}
       <div>
         <b>Tech Stack:</b> {data.tech?.join(", ")}
       </div>
 
-      {/* BUTTONS */}
       <div style={{ marginTop: 15, display: "flex", gap: 10 }}>
         {data.github && (
           <button onClick={() => window.open(data.github, "_blank")}>
             🔗 GitHub
           </button>
         )}
-
         {data.live && (
           <button onClick={() => window.open(data.live, "_blank")}>
             🌐 Live
           </button>
         )}
       </div>
-
     </div>
   );
 }

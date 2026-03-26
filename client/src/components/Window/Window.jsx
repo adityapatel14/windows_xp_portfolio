@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useMemo } from 'react';
 import { Rnd } from 'react-rnd';
 import { motion, AnimatePresence } from 'framer-motion';
 import TitleBar from './TitleBar';
@@ -32,7 +32,11 @@ const TASKBAR_HEIGHT = 40;
 
 export default function Window({ win, isActive }) {
   const { focusWindow, updatePosition, updateSize, maximizeWindow } = useWindowStore();
-  const AppComponent = resolveApp(win.appId, win.id);
+
+  // Memoize so the component reference is stable — prevents unmount/remount on every
+  // store update (e.g. focusWindow), which would wipe filter state and block clicks.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const AppComponent = useMemo(() => resolveApp(win.appId, win.id), [win.appId, win.id]);
 
   // Compute maximized bounds
   const maxBounds = {
@@ -124,9 +128,7 @@ export default function Window({ win, isActive }) {
             }} />
 
             {/* App content */}
-            <div style={{ flex: 1, overflow: 'auto', background: '#fff', position: 'relative' }}>
-              console.log("WINDOW DATA:", win.data);
-              
+            <div style={{ flex: 1, overflow: 'hidden', position: 'relative', minHeight: 0 }}>
               <AppComponent windowId={win.id} data={win.data} />
             </div>
 
