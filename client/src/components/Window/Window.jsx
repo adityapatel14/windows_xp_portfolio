@@ -12,6 +12,9 @@ import InternetExplorer from '../Apps/InternetExplorer';
 import AboutMe from '../Apps/AboutMe';
 import FileExplorer from '../Apps/FileExplorer';
 import ProjectViewer from '../Apps/ProjectViewer';
+import ExcelViewer from '../Apps/ExcelViewer';
+import CodeViewer from '../Apps/CodeViewer';
+import SupermartDashboard from '../Apps/SupermartDashboard';
 
 const APP_COMPONENTS = {
   mycomputer: MyComputer,
@@ -22,9 +25,12 @@ const APP_COMPONENTS = {
   about:      AboutMe,
 };
 
-// Resolve app component — supports dynamic `project-<slug>` IDs
+// Resolve app component — supports dynamic `project-<slug>`, `file-*` IDs
 function resolveApp(appId, windowId) {
-  if (appId.startsWith('project-')) return (props) => <ProjectViewer {...props} windowId={windowId} />;
+  if (appId.startsWith('project-'))              return (props) => <ProjectViewer {...props} windowId={windowId} />;
+  if (appId.startsWith('file-excel'))            return ({ data }) => <ExcelViewer data={data} />;
+  if (appId.startsWith('file-code'))             return ({ data }) => <CodeViewer data={data} />;
+  if (appId.startsWith('file-dashboard-supermart')) return () => <SupermartDashboard />;
   return APP_COMPONENTS[appId] || (() => <div style={{ padding: 16, fontFamily: 'Tahoma' }}>Unknown App: {appId}</div>);
 }
 

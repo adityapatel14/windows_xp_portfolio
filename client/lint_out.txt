@@ -1,0 +1,103 @@
+
+E:\windows_xp_portfolio\client\src\components\Apps\CodeViewer.jsx
+  4:10  error  'tokenize' is defined but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+  4:25  error  'lang' is defined but never used                                                 no-unused-vars
+
+E:\windows_xp_portfolio\client\src\components\Apps\FileExplorer.jsx
+  344:7  error  Error: Cannot access variable before it is declared
+
+`handleOpen` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  342 |     const now  = Date.now();
+  343 |     if (lastClick.id === id && now - lastClick.time < 450) {
+> 344 |       handleOpen(item);
+      |       ^^^^^^^^^^ `handleOpen` accessed before it is declared
+  345 |       setLastClick({ id: null, time: 0 });
+  346 |     } else {
+  347 |       setSelected(id);
+
+  350 |   }, [lastClick, currentKey]); // eslint-disable-line
+  351 |
+> 352 |   const handleOpen = (item) => {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 353 |     setSelected(null);
+      | ^^^^^^^^^^^^^^^^^^^^^^
+> 354 |
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^
+> 400 |     }
+      | ^^^^^^^^^^^^^^^^^^^^^^
+> 401 |   };
+      | ^^^^^ `handleOpen` is declared here
+  402 |
+  403 |   const navigateTo = (index) => setPath((p) => p.slice(0, index + 1));
+  404 |   const goBack     = () => { if (path.length > 1) setPath((p) => p.slice(0, -1)); };  react-hooks/immutability
+
+E:\windows_xp_portfolio\client\src\components\Apps\InternetExplorer.jsx
+   25:10  error  'isInternal' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      no-unused-vars
+  200:5   error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  198 |
+  199 |   useEffect(() => {
+> 200 |     setLoading(true);
+      |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  201 |     const url = category
+  202 |       ? `/api/projects/category/${category}`
+  203 |       : '/api/projects';  react-hooks/set-state-in-effect
+  648:10  error  'addressFocused' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         no-unused-vars
+  980:34  error  Error: Cannot access refs during render
+
+React refs are values that are not needed for rendering. Refs should only be accessed outside of render, such as in event handlers or effects. Accessing a ref value (the `current` property) during render can cause your component not to update as expected (https://react.dev/reference/react/useRef).
+
+  978 |           </div>
+  979 |         ) : (
+> 980 |           renderPage(currentUrl, navigate)
+      |                                  ^^^^^^^^ Passing a ref to a function may read its value during render
+  981 |         )}
+  982 |       </div>
+  983 |                                                                                                                                                                                                                                                                                                                                                                  react-hooks/refs
+
+E:\windows_xp_portfolio\client\src\components\Apps\Notepad.jsx
+  166:11  error    Error: Cannot access variable before it is declared
+
+`startTypewriter` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+  164 |           setTyping(false);
+  165 |         } else {
+> 166 |           startTypewriter();
+      |           ^^^^^^^^^^^^^^^ `startTypewriter` accessed before it is declared
+  167 |         }
+  168 |       })
+  169 |       .catch(() => startTypewriter());
+
+  170 |   }, []); // eslint-disable-line
+  171 |
+> 172 |   function startTypewriter() {
+      |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 173 |     typeIdxRef.current = 0;
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 174 |     setDisplayed('');
+      …
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 190 |     timerRef.current = setTimeout(tick, TYPE_SPEED);
+      | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 191 |   }
+      | ^^^^ `startTypewriter` is declared here
+  192 |
+  193 |   // Skip animation on any keydown
+  194 |   const skipAnimation = useCallback(() => {  react-hooks/immutability
+  170:11  warning  Unused eslint-disable directive (no problems were reported)
+  249:22  error    'e' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               no-unused-vars
+
+E:\windows_xp_portfolio\client\src\components\Apps\Terminal.jsx
+  275:10  error  'histIdx' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+✖ 11 problems (10 errors, 1 warning)
+  0 errors and 1 warning potentially fixable with the `--fix` option.
+

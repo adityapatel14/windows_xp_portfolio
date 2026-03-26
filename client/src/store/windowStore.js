@@ -48,7 +48,7 @@ export const useWindowStore = create((set, get) => ({
   openWindow: (appId, options = {}) => {
     const { windows } = get();
 
-    const isProject = appId.startsWith('project-');
+    const isProject = appId.startsWith('project-') || appId.startsWith('file-');
     const existing  = !isProject && windows.find(w => w.appId === appId);
 
     // 🔁 If already open (non-project), just focus it
