@@ -34,11 +34,12 @@ export default function BootScreen() {
         />
         <div
           style={{
-            fontSize: 20,
+            fontSize: 17,
             color: '#dcdcdc',
-            marginTop: 6,
-            letterSpacing: 0.6,
+            marginTop: 4,
+            letterSpacing: 0.5,
             fontWeight: 400,
+            textShadow: '0 0 1.5px rgba(255,255,255,0.2)',
           }}
         >
           Professional
