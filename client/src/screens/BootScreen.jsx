@@ -11,106 +11,117 @@ export default function BootScreen() {
   }, [setPhase]);
 
   return (
-    <div style={{
-      width: '100vw',
-      height: '100vh',
-      background: '#000',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: '#fff',
-      fontFamily: 'Tahoma, sans-serif',
-    }}>
-      {/* XP Logo */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-        style={{ textAlign: 'center', marginBottom: 40 }}
-      >
-        <div style={{ fontSize: 64, marginBottom: 8 }}>🪟</div>
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 0 }}>
-          <span style={{
-            fontSize: 42,
-            fontWeight: '200',
-            color: '#fff',
-            letterSpacing: -2,
-          }}>
-            Windows
-          </span>
-          <span style={{
-            fontSize: 42,
-            fontWeight: 'bold',
-            background: 'linear-gradient(90deg, #FF5C00, #FFAB00, #FF5C00)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            marginLeft: 10,
-          }}>
-            XP
-          </span>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        background: '#000',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: 'Tahoma, sans-serif',
+        color: '#fff',
+        position: 'relative',
+      }}
+    >
+      {/* LOGO */}
+      <div style={{ textAlign: 'center', marginBottom: 40 }}>
+        <img
+          src="/assets/xpbootimage.webp"
+          alt="Windows XP"
+          style={{ width: 320 }}
+        />
+        <div
+          style={{
+            fontSize: 20,
+            color: '#dcdcdc',
+            marginTop: 6,
+            letterSpacing: 0.6,
+            fontWeight: 400,
+          }}
+        >
+          Professional
         </div>
-        <div style={{
-          fontSize: 12,
-          color: 'rgba(255,255,255,0.6)',
-          marginTop: 4,
-          fontStyle: 'italic',
-        }}>
-          Portfolio Edition
-        </div>
-      </motion.div>
+      </div>
 
-      {/* Progress bar */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-        style={{
-          width: 300,
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 8,
-        }}
-      >
-        <div style={{
-          width: '100%',
-          height: 14,
-          background: '#111',
-          border: '1px solid #333',
-          borderRadius: 7,
-          overflow: 'hidden',
-        }}>
+      {/* LOADING SECTION */}
+      <div style={{ marginTop: 10 }}>
+        
+        {/* OPTION 1 — REALISTIC ANIMATION (RECOMMENDED) */}
+        <div
+          style={{
+            width: 200,
+            height: 16,
+            background: '#111',
+            border: '1px solid #444',
+            overflow: 'hidden',
+            position: 'relative',
+            margin: '0 auto',
+          }}
+        >
           <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: '100%' }}
-            transition={{ duration: 3, ease: 'linear' }}
-            style={{
-              height: '100%',
-              background: 'linear-gradient(90deg, #245EDB, #5A90FF)',
-              borderRadius: 7,
+            initial={{ x: '-100%' }}
+            animate={{ x: '100%' }}
+            transition={{
+              repeat: Infinity,
+              duration: 1.1,
+              ease: 'linear',
             }}
-          />
+            style={{
+              display: 'flex',
+              gap: 3,
+              height: '100%',
+              alignItems: 'center',
+              paddingLeft: 4,
+            }}
+          >
+            {[...Array(5)].map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: 16,
+                  height: 10,
+                  background: '#3A8DFF',
+                }}
+              />
+            ))}
+          </motion.div>
         </div>
-        <div style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>
-          Loading your experience...
-        </div>
-      </motion.div>
 
-      {/* Footer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
+        {/* OPTION 2 — GIF (UNCOMMENT TO USE) */}
+        {/*
+        <img
+          src="/assets/xp-loading.gif"
+          alt="loading"
+          style={{ width: 200, display: 'block', margin: '0 auto' }}
+        />
+        */}
+
+        {/* TEXT */}
+        <div
+          style={{
+            marginTop: 10,
+            fontSize: 11,
+            color: 'rgba(255,255,255,0.5)',
+            textAlign: 'center',
+          }}
+        >
+          Starting Windows...
+        </div>
+      </div>
+
+      {/* FOOTER */}
+      <div
         style={{
           position: 'absolute',
-          bottom: 24,
+          bottom: 20,
           fontSize: 10,
           color: 'rgba(255,255,255,0.3)',
         }}
       >
-        Copyright © 2026 Portfolio Edition. Inspired by Microsoft Windows XP.
-      </motion.div>
+        © Microsoft Corporation
+      </div>
     </div>
   );
 }

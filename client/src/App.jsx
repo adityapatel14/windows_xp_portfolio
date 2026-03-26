@@ -15,25 +15,38 @@ import ShutdownScreen from './screens/ShutdownScreen';
 function DesktopEnvironment() {
   usePersistWindows();
 
-  // Global delegated click sound for all buttons/interactive elements.
-  // Uses a small cooldown so rapid clicks don't stack up sounds.
+  // Global click sound
   useEffect(() => {
     let lastPlayed = 0;
     const handler = (e) => {
       const target = e.target.closest('button, [role="button"], .xp-btn, .xp-icon');
       if (!target) return;
+
       const now = Date.now();
-      if (now - lastPlayed < 80) return; // cooldown
+      if (now - lastPlayed < 80) return;
+
       lastPlayed = now;
       unlockAudio();
       playClick();
     };
+
     document.addEventListener('click', handler, true);
     return () => document.removeEventListener('click', handler, true);
   }, []);
 
   return (
-    <div style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative' }}>
+    <div
+      style={{
+        width: '100vw',
+        height: '100vh',
+        overflow: 'hidden',
+        position: 'relative',
+        backgroundImage: "url('/assets/xp-bg.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        fontFamily: 'Tahoma, sans-serif',
+      }}
+    >
       <Desktop />
       <WindowManager />
       <Taskbar />
