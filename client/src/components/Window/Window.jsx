@@ -125,7 +125,9 @@ export default function Window({ win, isActive }) {
 
             {/* App content */}
             <div style={{ flex: 1, overflow: 'auto', background: '#fff', position: 'relative' }}>
-              <AppComponent windowId={win.id} />
+              console.log("WINDOW DATA:", win.data);
+              
+              <AppComponent windowId={win.id} data={win.data} />
             </div>
 
             {/* Status bar */}

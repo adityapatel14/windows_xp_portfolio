@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import axios from 'axios';
 import { useWindowStore } from '../../store/windowStore';
-
+import PROJECTS from "../../data/projects";
 // ── Folder tree ──────────────────────────────────────────────────────────────
 const TREE = {
   root: {
@@ -90,15 +89,23 @@ export default function FileExplorer() {
 
   // Fetch projects when at a category folder
   useEffect(() => {
-    const n = TREE[currentKey];
-    if (!n?.isCategory) { setProjects([]); return; }
-    setLoading(true);
-    setError(null);
-    axios.get(`/api/projects/category/${n.category}`)
-      .then((r) => setProjects(r.data))
-      .catch(() => setError('Could not load projects (is the server running?)'))
-      .finally(() => setLoading(false));
-  }, [currentKey]);
+  const n = TREE[currentKey];
+
+  if (!n?.isCategory) {
+    setProjects([]);
+    return;
+  }
+
+  setLoading(false);
+  setError(null);
+
+
+  // Filter based on folder
+  setProjects(
+    PROJECTS.filter((p) => p.category === n.category)
+  );
+
+}, [currentKey]);
 
   // Build items for the main panel
   const getItems = () => {
@@ -125,10 +132,12 @@ export default function FileExplorer() {
     setSelected(null);
 
     if (item.slug) {
-      // It's a project file → open ProjectViewer window
-      openWindow(`project-${item.slug}`);
-      return;
-    }
+    openWindow(`project-${item.slug}`, {
+     title: item.title,
+     data: item
+    });
+    return;
+  }
 
     // It's a folder node
     const key = item.key || item.id;
