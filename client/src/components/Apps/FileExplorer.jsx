@@ -104,10 +104,17 @@ const FOLDER_FILES = {
     {
       id:       'fandango-py',
       icon:     '🐍',
-      label:    'fandango_analysis.py',
+      label:    'analysis.py',
       appId:    'file-code',
       title:    'Fandango Rating Analysis',
-      fileData: { code: PYTHON_CONTENT, language: 'python', filename: 'fandango_analysis.py' },
+      fileData: { code: PYTHON_CONTENT, language: 'python', filename: 'analysis.py' },
+    },
+    {
+      id:     'fandango-dashboard',
+      icon:   '📈',
+      label:  'fandango_dashboard',
+      appId:  'file-dashboard-fandango',
+      title:  'Fandango Rating Bias Dashboard',
     },
     {
       id:       'fandango-readme',
@@ -154,11 +161,11 @@ https://github.com/adityapatel14/fandango-analysis
     {
       id:       'supermart-xlsx',
       icon:     '📊',
-      label:    'supermart_sales.xlsx',
+      label:    'dataset.xlsx',
       appId:    'file-excel',
       title:    'Supermart Sales Dataset',
       fileData: {
-        filename: 'supermart_sales.xlsx',
+        filename: 'dataset.xlsx',
         columns:  supermartColumns,
         rows:     supermartData,
         meta:     { rows: '9,994 rows (sample shown)' },
@@ -167,10 +174,10 @@ https://github.com/adityapatel14/fandango-analysis
     {
       id:       'supermart-sql',
       icon:     '🗄️',
-      label:    'supermart_sql.sql',
+      label:    'queries.sql',
       appId:    'file-code',
       title:    'Supermart SQL Queries',
-      fileData: { code: SQL_CONTENT, language: 'sql', filename: 'supermart_sql.sql' },
+      fileData: { code: SQL_CONTENT, language: 'sql', filename: 'queries.sql' },
     },
     {
       id:     'supermart-dashboard',
@@ -316,10 +323,18 @@ function FolderItem({ item, selected, onSingleClick }) {
 }
 
 // ── Main FileExplorer component ───────────────────────────────
-export default function FileExplorer() {
+export default function FileExplorer({ data }) {
   const { openWindow } = useWindowStore();
 
-  const [path, setPath]           = useState(['root']);
+  const resolveInitialPath = () => {
+    const sp = data?.startPath;
+    if (sp && ['fandango','supermart_project','internship_research'].includes(sp)) {
+      return ['root','myProjects',sp];
+    }
+    return ['root'];
+  };
+
+  const [path, setPath]           = useState(resolveInitialPath);
   const [selected, setSelected]   = useState(null);
   const [lastClick, setLastClick] = useState({ id: null, time: 0 });
 
@@ -359,6 +374,15 @@ export default function FileExplorer() {
       openWindow(`file-code-${item.id}-${Date.now()}`, {
         title: item.title || item.label,
         data:  { viewerType: 'code', ...item.fileData },
+      });
+      return;
+    }
+
+    // ── Fandango dashboard ────────────────────────────────────
+    if (item.appId === 'file-dashboard-fandango') {
+      openWindow(`file-dashboard-fandango-${Date.now()}`, {
+        title: item.title || 'Fandango Rating Bias Dashboard',
+        data:  { viewerType: 'fandango-dashboard' },
       });
       return;
     }

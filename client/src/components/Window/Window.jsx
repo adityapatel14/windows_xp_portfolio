@@ -15,6 +15,7 @@ import ProjectViewer from '../Apps/ProjectViewer';
 import ExcelViewer from '../Apps/ExcelViewer';
 import CodeViewer from '../Apps/CodeViewer';
 import SupermartDashboard from '../Apps/SupermartDashboard';
+import FandangoDashboard from '../Apps/FandangoDashboard';
 
 const APP_COMPONENTS = {
   mycomputer: MyComputer,
@@ -31,6 +32,7 @@ function resolveApp(appId, windowId) {
   if (appId.startsWith('file-excel'))            return ({ data }) => <ExcelViewer data={data} />;
   if (appId.startsWith('file-code'))             return ({ data }) => <CodeViewer data={data} />;
   if (appId.startsWith('file-dashboard-supermart')) return () => <SupermartDashboard />;
+  if (appId.startsWith('file-dashboard-fandango'))  return () => <FandangoDashboard />;
   return APP_COMPONENTS[appId] || (() => <div style={{ padding: 16, fontFamily: 'Tahoma' }}>Unknown App: {appId}</div>);
 }
 
