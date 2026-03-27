@@ -9,6 +9,16 @@ import PYTHON_CONTENT from '../../data/pythonContent';
 
 // ── File definitions per folder ───────────────────────────────
 const FOLDER_FILES = {
+  myDocuments: [
+    {
+      id:       'resume-pdf',
+      icon:     '📄',
+      label:    'Aditya_Patel_Resume.pdf',
+      appId:    'file-pdf',
+      title:    'Aditya Patel - Resume',
+      fileData: { url: '/assets/Aditya_Patel_Resume.pdf' },
+    }
+  ],
   internship_research: [
     {
       id:       'internship-xlsx',
@@ -266,7 +276,7 @@ const TREE = {
   fandango:            { icon: '📂', label: 'fandango',            isProjectFolder: true },
   supermart_project:   { icon: '📂', label: 'supermart_project',   isProjectFolder: true },
   internship_research: { icon: '📂', label: 'internship_research', isProjectFolder: true },
-  myDocuments:  { icon: '📁', label: 'My Documents',  children: [], isFolder: true },
+  myDocuments:  { icon: '📁', label: 'My Documents',  isProjectFolder: true },
   controlPanel: { icon: '⚙️', label: 'Control Panel', children: [], isFolder: true },
 };
 
@@ -314,8 +324,14 @@ function FolderItem({ item, selected, onSingleClick }) {
       title={item.label}
     >
       <span style={{ fontSize: 30, lineHeight: 1 }}>{item.icon}</span>
-      <span style={{ wordBreak: 'break-word', maxWidth: 84, lineHeight: 1.3,
-        color: isSelected ? '#fff' : '#000' }}>
+      <span style={{ 
+        whiteSpace: 'nowrap', 
+        overflow: 'hidden', 
+        textOverflow: 'ellipsis', 
+        maxWidth: 84, 
+        lineHeight: 1.3,
+        color: isSelected ? '#fff' : '#000' 
+      }}>
         {item.label}
       </span>
     </button>
@@ -375,6 +391,12 @@ export default function FileExplorer({ data }) {
         title: item.title || item.label,
         data:  { viewerType: 'code', ...item.fileData },
       });
+      return;
+    }
+
+    // ── PDF viewer (Resume) ───────────────────────────────────
+    if (item.appId === 'file-pdf') {
+      window.open(item.fileData.url || '/assets/Aditya_Patel_Resume.pdf', '_blank');
       return;
     }
 

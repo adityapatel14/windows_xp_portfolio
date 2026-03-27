@@ -1,12 +1,12 @@
 import React from 'react';
 
 const SKILLS = [
-  { name: 'React / Next.js', level: 95, color: '#61DAFB' },
-  { name: 'Node.js / Express', level: 90, color: '#68A063' },
-  { name: 'MongoDB', level: 85, color: '#4DB33D' },
-  { name: 'TypeScript', level: 88, color: '#3178C6' },
-  { name: 'Three.js / R3F', level: 80, color: '#FF6600' },
-  { name: 'Docker / DevOps', level: 75, color: '#2496ED' },
+  { name: 'Python (Pandas, NumPy)', level: 90, color: '#3776AB' },
+  { name: 'SQL (MySQL)', level: 85, color: '#4479A1' },
+  { name: 'Power BI / Tableau', level: 90, color: '#F2C811' },
+  { name: 'EDA & Hypothesis Test', level: 80, color: '#4CAF50' },
+  { name: 'Matplotlib / Seaborn', level: 85, color: '#FF6600' },
+  { name: 'Excel', level: 95, color: '#217346' },
 ];
 
 export default function AboutMe() {
@@ -38,13 +38,18 @@ export default function AboutMe() {
           border: '3px solid rgba(255,255,255,0.4)',
           flexShrink: 0,
         }}>
-          👤
+          <img 
+            src="/assets/adi.jpg" 
+            alt="Aditya Kaushik Patel" 
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '👤'; }}
+          />
         </div>
         <div>
-          <div style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Portfolio Developer</div>
-          <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 11 }}>Full-Stack Developer | Creative Coder</div>
+          <div style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Aditya Kaushik Patel</div>
+          <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 11 }}>Data Analyst | Product Analyst</div>
           <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 10, marginTop: 2 }}>
-            📍 Windows XP Enthusiast Since 2001
+            📍 Uncovering patterns for data-driven decisions
           </div>
         </div>
       </div>
@@ -55,17 +60,14 @@ export default function AboutMe() {
         <div style={{ flex: 1, minWidth: 0 }}>
           <Section title="About Me">
             <p style={{ lineHeight: 1.7, color: '#333' }}>
-              I'm a passionate full-stack developer who loves building beautiful, 
-              performance-driven web applications. From 3D interactive experiences 
-              with Three.js to pixel-perfect desktop UIs, I bring creativity and 
-              technical depth to every project.
+              I am a data-driven analyst with experience in exploratory data analysis, dashboarding, and business insights. I specialize in Python (Pandas), SQL, and Power BI to uncover patterns and support data-driven decision making. I have worked on real-world datasets including internship analytics, supermarket performance, and rating bias analysis.
             </p>
           </Section>
 
-          <Section title="Experience">
-            <ExpItem role="Senior Frontend Dev" company="TechCorp Inc." period="2023–Present" />
-            <ExpItem role="Full-Stack Developer" company="StartupXYZ" period="2021–2023" />
-            <ExpItem role="Frontend Intern" company="Agency Co." period="2020–2021" />
+          <Section title="Tools">
+            <ExpItem role="IDE & Testing" company="Jupyter Notebook, VS Code" period="Daily Use" />
+            <ExpItem role="Version Control" company="Git, GitHub" period="Daily Use" />
+            <ExpItem role="Office Suite" company="MS Excel (Advanced)" period="Daily Use" />
           </Section>
         </div>
 
@@ -93,9 +95,13 @@ export default function AboutMe() {
 
           <Section title="Contact">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <a href="mailto:hello@portfolio.dev" style={{ color: '#0054E3', textDecoration: 'none', fontSize: 11 }}>✉️ hello@portfolio.dev</a>
-              <a href="https://github.com" target="_blank" rel="noreferrer" style={{ color: '#0054E3', textDecoration: 'none', fontSize: 11 }}>🐙 GitHub</a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" style={{ color: '#0054E3', textDecoration: 'none', fontSize: 11 }}>💼 LinkedIn</a>
+              <a href="mailto:contact@adityapatel.com" style={{ color: '#0054E3', textDecoration: 'none', fontSize: 11 }}>✉️ Contact Me</a>
+              <button className="xp-btn" style={{ marginTop: 8, display: 'flex', alignItems: 'center', gap: 6, width: '100%', justifyContent: 'flex-start' }} onClick={() => window.open('https://github.com/adityapatel14', '_blank')}>
+                <span>🐙</span> GitHub
+              </button>
+              <button className="xp-btn" style={{ marginTop: 4, display: 'flex', alignItems: 'center', gap: 6, width: '100%', justifyContent: 'flex-start' }} onClick={() => window.open('https://linkedin.com/in/aditya-kaushik-patel', '_blank')}>
+                <span>💼</span> LinkedIn
+              </button>
             </div>
           </Section>
         </div>

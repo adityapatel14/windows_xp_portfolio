@@ -43,6 +43,13 @@ export default function ProjectViewer({ data }) {
           </button>
         )}
 
+        <button
+          onClick={() => window.open('https://linkedin.com/in/aditya-kaushik-patel', '_blank')}
+          className="xp-btn"
+        >
+          💼 View Profile
+        </button>
+
         {data.live && (
           <button
             onClick={() => window.open(data.live, "_blank")}

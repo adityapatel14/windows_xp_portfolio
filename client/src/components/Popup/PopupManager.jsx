@@ -3,9 +3,9 @@ import { AnimatePresence } from 'framer-motion';
 import { usePopupStore } from '../../store/popupStore';
 import XPPopup from './XPPopup';
 
-// Random interval between 20s and 45s
-const MIN_INTERVAL = 20_000;
-const MAX_INTERVAL = 45_000;
+// Random interval between 15s and 30s
+const MIN_INTERVAL = 15_000;
+const MAX_INTERVAL = 30_000;
 
 function randomDelay() {
   return MIN_INTERVAL + Math.random() * (MAX_INTERVAL - MIN_INTERVAL);
@@ -18,7 +18,9 @@ export default function PopupManager() {
   useEffect(() => {
     function scheduleNext() {
       timerRef.current = setTimeout(() => {
-        triggerRandom();
+        if (usePopupStore.getState().popups.length < 3) {
+          triggerRandom();
+        }
         scheduleNext();
       }, randomDelay());
     }

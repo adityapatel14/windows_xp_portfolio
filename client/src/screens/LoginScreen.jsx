@@ -48,45 +48,44 @@ export default function LoginScreen() {
         </div>
 
         <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
+          whileHover={{ 
+            scale: 1.02, 
+            backgroundColor: 'rgba(255,255,255,0.1)', 
+            boxShadow: '0 0 10px rgba(255,255,255,0.3)' 
+          }}
+          whileTap={{ scale: 0.98 }}
           onClick={() => { unlockAudio(); playStartup(); setPhase('desktop'); }}
           style={{
             display: 'inline-flex',
-            flexDirection: 'column',
+            flexDirection: 'row',
             alignItems: 'center',
-            gap: 12,
-            background: 'rgba(255,255,255,0.12)',
-            border: '2px solid rgba(255,255,255,0.3)',
-            borderRadius: 8,
-            padding: '20px 32px',
+            gap: 16,
+            padding: '12px 24px',
             cursor: 'pointer',
-            backdropFilter: 'blur(8px)',
+            borderRadius: 4,
+            border: '1px solid transparent',
+            transition: 'all 0.2s',
           }}
         >
           <div style={{
             width: 72,
             height: 72,
-            borderRadius: 36,
-            background: 'linear-gradient(135deg, #FFA500, #FF6600)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: 40,
-            border: '3px solid rgba(255,255,255,0.5)',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.4)',
+            borderRadius: 8,
+            border: '2px solid rgba(255,255,255,0.8)',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+            overflow: 'hidden',
+            flexShrink: 0,
+            background: '#fff',
           }}>
-            👤
+            <img 
+              src="/assets/adi.jpg" 
+              alt="Aditya Patel" 
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              onError={(e) => { e.target.onerror = null; e.target.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>' }}
+            />
           </div>
-          <div style={{ color: '#fff', fontSize: 14, fontWeight: 'bold' }}>Portfolio User</div>
-          <div style={{
-            fontSize: 11,
-            color: 'rgba(255,255,255,0.7)',
-            background: 'linear-gradient(90deg, #245EDB, #5A90FF)',
-            padding: '3px 16px',
-            borderRadius: 12,
-          }}>
-            Click to log in
+          <div style={{ color: '#fff', fontSize: 20, fontWeight: 'bold', textShadow: '1px 1px 2px rgba(0,0,0,0.8)' }}>
+            Aditya Patel
           </div>
         </motion.div>
       </motion.div>
@@ -99,14 +98,20 @@ export default function LoginScreen() {
         height: 48,
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'space-between',
         padding: '0 24px',
         gap: 12,
         borderTop: '3px solid #0A246A',
       }}>
-        {['Turn Off Computer', 'Options'].map((label) => (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+          <div style={{ background: '#CC0000', borderRadius: 4, padding: '2px 4px', border: '1px solid #fff' }}>
+            <span style={{ color: '#fff', fontSize: 14 }}>⏻</span>
+          </div>
+          <span style={{ color: '#fff', fontSize: 11, fontFamily: 'Tahoma, sans-serif' }}>Turn off computer</span>
+        </div>
+        
+        <div>
           <button
-            key={label}
             style={{
               background: 'linear-gradient(180deg, #5080D0 0%, #2855B0 100%)',
               border: '1px solid #0A246A',
@@ -118,9 +123,9 @@ export default function LoginScreen() {
               cursor: 'pointer',
             }}
           >
-            {label}
+            Options
           </button>
-        ))}
+        </div>
       </div>
     </div>
   );

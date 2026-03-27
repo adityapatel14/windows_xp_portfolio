@@ -8,6 +8,8 @@ const DESKTOP_ICONS = [
   { id: 'notepad',    label: 'Notepad',               emoji: '📝' },
   { id: 'terminal',   label: 'Command\nPrompt',       emoji: '💻' },
   { id: 'browser',    label: 'Internet\nExplorer',    emoji: '🌐' },
+  { id: 'github',     label: 'GitHub',                emoji: '🐙' },
+  { id: 'linkedin',   label: 'LinkedIn',              emoji: '💼' },
 ];
 
 export default function Desktop() {
@@ -20,7 +22,13 @@ export default function Desktop() {
     const now = Date.now();
     if (lastClick.id === iconId && now - lastClick.time < 400) {
       // Double click
-      openWindow(iconId);
+      if (iconId === 'github') {
+        window.open('https://github.com/adityapatel14', '_blank');
+      } else if (iconId === 'linkedin') {
+        window.open('https://linkedin.com/in/aditya-kaushik-patel', '_blank');
+      } else {
+        openWindow(iconId);
+      }
       setSelected(null);
       setLastClick({ id: null, time: 0 });
     } else {

@@ -4,121 +4,23 @@ import axios from 'axios';
 // ─────────────────────────────────────────────────────────────
 // about_me.txt content
 // ─────────────────────────────────────────────────────────────
-const ABOUT_ME = `================================================================================
-   about_me.txt
-   Last modified: March 2026
-================================================================================
+const ABOUT_ME = `Welcome to my portfolio OS.
 
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                         HELLO, WORLD.  ( ͡° ͜ʖ ͡°)                          ║
-╚══════════════════════════════════════════════════════════════════════════════╝
+This system is designed to simulate a real Windows XP environment where you can explore my projects, datasets, and analysis.
 
-  My name is Portfolio Dev — a full-stack developer with a passion for
-  crafting experiences that live at the intersection of technical depth
-  and pixel-perfect design. If you're reading this inside a Windows XP
-  Notepad running in a React app... you already know I'm a little extra.
+Key Highlights:
+* Internship Dashboard (Power BI)
+* Supermart SQL Analysis
+* Fandango Rating Bias Study
 
-  Currently based on the internet. Possibly on your screen right now.
+Use File Explorer to navigate through folders and open files.
 
-
-────────────────────────────────────────────────────────────────────────────────
-  SECTION 1 — INTRODUCTION
-────────────────────────────────────────────────────────────────────────────────
-
-  I started coding at age 14 with a pirated copy of Macromedia Flash and
-  a burning desire to make things move on screen. Since then I've shipped
-  production apps used by thousands, built 3D portfolio experiences using
-  Three.js, and somehow ended up recreating Windows XP in a browser.
-
-  I believe great software is:
-    • Fast       — users shouldn't wait for you
-    • Accessible — works for everyone, everywhere
-    • Delightful — the little details that make people smile
-
-  When I'm not writing code I'm reading about distributed systems,
-  experimenting with generative art, or over-engineering my home lab.
-
-
-────────────────────────────────────────────────────────────────────────────────
-  SECTION 2 — SKILLS & TECHNOLOGIES
-────────────────────────────────────────────────────────────────────────────────
-
-  Frontend
-  ○ React 18+, Next.js 14+, TypeScript
-  ○ Three.js / React Three Fiber / WebGL
-  ○ Framer Motion, GSAP, CSS animations
-  ○ Tailwind CSS, styled-components, vanilla CSS
-
-  Backend
-  ○ Node.js, Express, Fastify
-  ○ Python, FastAPI, Django
-  ○ REST APIs, GraphQL, WebSockets
-
-  Data & ML
-  ○ PostgreSQL, MongoDB, Redis
-  ○ Apache Spark, Airflow ETL pipelines
-  ○ PyTorch, HuggingFace Transformers
-  ○ Pandas, NumPy, Scikit-learn
-
-  DevOps & Cloud
-  ○ Docker, Kubernetes
-  ○ GitHub Actions CI/CD
-  ○ AWS (EC2, S3, Lambda), Vercel, Fly.io
-  ○ Linux server administration
-
-  Skill level key:  ████████░░ Comfortable   ██████████ Expert
-
-
-────────────────────────────────────────────────────────────────────────────────
-  SECTION 3 — CAREER GOALS
-────────────────────────────────────────────────────────────────────────────────
-
-  Short-term (1–2 years):
-  ▶ Join a product team where I can own a significant feature end-to-end
-  ▶ Deepen expertise in real-time collaborative systems (CRDTs, WebRTC)
-  ▶ Ship an open-source project with 1 000+ GitHub stars
-
-  Long-term (3–5 years):
-  ▶ Lead an engineering team focused on developer tooling or creative tech
-  ▶ Build a profitable SaaS product (idea: AI-assisted design system gen)
-  ▶ Contribute meaningfully to web performance & accessibility standards
-
-  Dream project:
-    A browser-native 3D collaborative IDE that makes pair programming feel
-    like you're in the same physical space. (Yes, I know how ambitious that
-    sounds. That's the point.)
-
-
-────────────────────────────────────────────────────────────────────────────────
-  SECTION 4 — FUN FACTS
-────────────────────────────────────────────────────────────────────────────────
-
-  • First computer: a Pentium III running Windows 98
-  • This portfolio is intentionally over-engineered (it's a feature)
-  • I type at ~110 WPM yet still misspell "definitely" constantly
-  • Favourite debugging technique: explaining the problem to a rubber duck
-  • Currently listening to: lo-fi hip hop & synthwave playlists on loop
-
-
-────────────────────────────────────────────────────────────────────────────────
-  CONTACT
-────────────────────────────────────────────────────────────────────────────────
-
-  Email    →  hello@portfolio.dev
-  GitHub   →  github.com/portfolio-dev
-  LinkedIn →  linkedin.com/in/portfolio-dev
-  Twitter  →  @portfoliodev
-
-
-================================================================================
-  EOF — about_me.txt
-================================================================================
-`;
+Tip: Try opening Internet Explorer 😉`;
 
 // ─────────────────────────────────────────────────────────────
 // Constants
 // ─────────────────────────────────────────────────────────────
-const NOTE_ID   = 'about-me-note';
+const NOTE_ID   = 'notes-txt';
 const TYPE_SPEED = 14; // ms per character (adjust for taste)
 
 const MENUS = {
@@ -455,7 +357,7 @@ export default function Notepad() {
         }}>
           {typing
             ? `Typing... ${Math.floor((typeIdxRef.current / ABOUT_ME.length) * 100)}%  (click to skip)`
-            : `about_me.txt`}
+            : `notes.txt`}
         </div>
         <div style={{ padding: '0 8px', color: '#444', whiteSpace: 'nowrap' }}>
           Ln {statusLine.ln}, Col {statusLine.col}

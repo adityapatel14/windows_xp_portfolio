@@ -3,37 +3,11 @@ import { useWindowStore } from '../../store/windowStore';
 
 const PROJECT_FOLDERS = [
   {
-    id: 'internship_research',
-    name: 'internship_research',
+    id: 'myProjects',
+    name: 'My Projects',
     icon: '📁',
-    desc: 'Power BI Dashboard · Student Internship Analysis',
-    files: [
-      { name: 'internship_dashboard', icon: '📈', desc: 'Interactive Power BI Dashboard' },
-      { name: 'dataset.xlsx',         icon: '📊', desc: 'Merged student internship dataset (2,004 rows)' },
-    ],
-  },
-  {
-    id: 'fandango',
-    name: 'fandango',
-    icon: '📁',
-    desc: 'Movie Rating Bias Study · Python + Data Analysis',
-    files: [
-      { name: 'fandango_dashboard', icon: '📈', desc: 'Rating Distribution Dashboard' },
-      { name: 'dataset.xlsx',       icon: '📊', desc: 'fandango_scrape.csv (146 movies)' },
-      { name: 'analysis.py',        icon: '🐍', desc: 'Python analysis script' },
-    ],
-  },
-  {
-    id: 'supermart_project',
-    name: 'supermart_project',
-    icon: '📁',
-    desc: 'SQL + Power BI Sales Dashboard · 9,994 rows',
-    files: [
-      { name: 'SUPERMART dashboard', icon: '📈', desc: 'Sales Dashboard (Recharts)' },
-      { name: 'dataset.xlsx',        icon: '📊', desc: 'Supermart sales dataset (9,994 rows)' },
-      { name: 'queries.sql',         icon: '🗄️', desc: 'SQL analysis queries' },
-    ],
-  },
+    desc: 'Shortcut to all Data & Analytics projects',
+  }
 ];
 
 export default function MyComputer() {
@@ -44,14 +18,20 @@ export default function MyComputer() {
   const folder = openFolder ? PROJECT_FOLDERS.find((f) => f.id === openFolder) : null;
 
   const openInExplorer = (folderId) => {
-    openWindow(`explorer-${folderId}-${Date.now()}`, {
+    openWindow('explorer', {
+      id: `explorer-${folderId}-${Date.now()}`,
       title: `File Explorer — ${folderId}`,
       data:  { startPath: folderId },
     });
   };
 
   const handleFolderDblClick = (folderId) => {
-    setOpenFolder(folderId);
+    if (folderId === 'myProjects') {
+      openInExplorer('myProjects');
+      setOpenFolder(null);
+    } else {
+      setOpenFolder(folderId);
+    }
     setSelected(null);
   };
 
@@ -178,7 +158,7 @@ export default function MyComputer() {
                     }}
                   >
                     <span style={{ fontSize: 36 }}>{f.icon}</span>
-                    <span style={{ wordBreak: 'break-word', maxWidth: 80, lineHeight: 1.3 }}>{f.name}</span>
+                    <span style={{ wordBreak: 'normal', overflowWrap: 'break-word', maxWidth: 84, lineHeight: 1.3 }}>{f.name}</span>
                   </button>
                 ))}
               </div>
@@ -192,7 +172,7 @@ export default function MyComputer() {
                   }}>
                     <b>{f.name}</b> — {f.desc}
                     <div style={{ marginTop: 4, color: '#555' }}>
-                      Double-click to browse files, or use the Explorer button.
+                      Double-click to open in Explorer.
                     </div>
                   </div>
                 ) : null;
@@ -231,7 +211,7 @@ export default function MyComputer() {
                     }}
                   >
                     <span style={{ fontSize: 32 }}>{file.icon}</span>
-                    <span style={{ wordBreak: 'break-word', maxWidth: 80, lineHeight: 1.3 }}>{file.name}</span>
+                    <span style={{ wordBreak: 'normal', overflowWrap: 'break-word', maxWidth: 84, lineHeight: 1.3 }}>{file.name}</span>
                   </button>
                 ))}
               </div>
