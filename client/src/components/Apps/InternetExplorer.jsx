@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 
-export default function InternetExplorer() {
+export default function InternetExplorer({ data }) {
   const HOME = "https://windows-xp-portfolio-nu.vercel.app/";
-  const [url, setUrl] = useState(HOME);
-  const [input, setInput] = useState(HOME);
+  const initialUrl = data?.url || HOME;
+  const [url, setUrl] = useState(initialUrl);
+  const [input, setInput] = useState(initialUrl);
 
   const goTo = () => {
     const targetUrl = input.startsWith("http") ? input : "https://" + input;
-    
-    // Check if the user is trying to recursively load the portfolio
-    if (targetUrl.includes("windows-xp-portfolio") || targetUrl.includes("localhost")) {
-      window.location.reload();
-      return;
-    }
-
     setUrl(targetUrl);
   };
 

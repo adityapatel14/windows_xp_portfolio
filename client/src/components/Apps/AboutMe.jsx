@@ -21,41 +21,35 @@ export default function AboutMe() {
       {/* Header */}
       <div style={{
         background: 'linear-gradient(135deg, #245EDB 0%, #0A246A 100%)',
-        padding: '20px 24px',
+        padding: '24px 30px',
         display: 'flex',
         alignItems: 'center',
-        gap: 16,
+        gap: 20,
       }}>
-        <div style={{
-          width: 64,
-          height: 64,
-          borderRadius: 32,
-          background: 'linear-gradient(135deg, #FFA500, #FF6600)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          fontSize: 36,
-          border: '3px solid rgba(255,255,255,0.4)',
-          flexShrink: 0,
-        }}>
-          <img 
-            src="/assets/adi.jpg" 
-            alt="Aditya Kaushik Patel" 
-            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '👤'; }}
-          />
-        </div>
-        <div>
-          <div style={{ color: '#fff', fontSize: 18, fontWeight: 'bold' }}>Aditya Kaushik Patel</div>
-          <div style={{ color: 'rgba(255,255,255,0.8)', fontSize: 11 }}>Data Analyst | Product Analyst</div>
-          <div style={{ color: 'rgba(255,255,255,0.6)', fontSize: 10, marginTop: 2 }}>
+        <img 
+          src="/assets/adi.jpg" 
+          alt="Aditya Kaushik Patel" 
+          style={{
+            width: 80,
+            height: 80,
+            borderRadius: "50%",
+            objectFit: "cover",
+            border: "2px solid white",
+            boxShadow: "0 0 6px rgba(0,0,0,0.4)"
+          }}
+          onError={(e) => { e.target.style.display = 'none'; e.target.parentNode.innerHTML = '👤'; }}
+        />
+        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+          <div style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>Aditya Kaushik Patel</div>
+          <div style={{ color: 'rgba(255,255,255,0.9)', fontSize: 13, marginTop: 4 }}>Data Analyst | Product Analyst</div>
+          <div style={{ color: 'rgba(255,255,255,0.7)', fontSize: 11, marginTop: 6 }}>
             📍 Uncovering patterns for data-driven decisions
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div style={{ padding: '16px 20px', display: 'flex', gap: 16 }}>
+      <div style={{ padding: '20px 24px', display: 'flex', gap: 24 }}>
         {/* Left */}
         <div style={{ flex: 1, minWidth: 0 }}>
           <Section title="About Me">

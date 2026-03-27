@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useSystemStore } from './store/systemStore';
+import { useWindowStore } from './store/windowStore';
 import { usePersistWindows } from './hooks/usePersistWindows';
 import { unlockAudio, playClick } from './hooks/soundEngine';
 import BootScreen from './screens/BootScreen';
@@ -58,6 +59,28 @@ function DesktopEnvironment() {
 
 export default function App() {
   const { phase } = useSystemStore();
+  const openWindow = useWindowStore(state => state.openWindow);
+
+  useEffect(() => {
+    const handleMessage = (event) => {
+      if (event.data?.type === "OPEN_IE") {
+        const windows = useWindowStore.getState().windows;
+        const lastBrowser = [...windows].reverse().find(w => w.appId === 'browser');
+        const x = lastBrowser ? lastBrowser.x + 30 : undefined;
+        const y = lastBrowser ? lastBrowser.y + 30 : undefined;
+
+        openWindow("browser", {
+          data: { url: event.data.url },
+          forceNew: true,
+          x,
+          y,
+          title: "Internet Explorer"
+        });
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [openWindow]);
 
   return (
     <AnimatePresence mode="wait">

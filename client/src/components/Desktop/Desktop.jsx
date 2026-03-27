@@ -27,7 +27,11 @@ export default function Desktop() {
       } else if (iconId === 'linkedin') {
         window.open('https://linkedin.com/in/aditya-kaushik-patel', '_blank');
       } else {
-        openWindow(iconId);
+        if (iconId === 'browser' && window !== window.parent) {
+          window.parent.postMessage({ type: "OPEN_IE", url: window.location.href }, "*");
+        } else {
+          openWindow(iconId);
+        }
       }
       setSelected(null);
       setLastClick({ id: null, time: 0 });

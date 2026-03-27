@@ -49,7 +49,7 @@ export const useWindowStore = create((set, get) => ({
     const { windows } = get();
 
     const isProject = appId.startsWith('project-') || appId.startsWith('file-');
-    const existing  = !isProject && windows.find(w => w.appId === appId);
+    const existing  = !isProject && !options.forceNew && windows.find(w => w.appId === appId);
 
     // 🔁 If already open (non-project), just focus it
     if (existing) {
@@ -89,6 +89,8 @@ export const useWindowStore = create((set, get) => ({
     }
 
     const count = windows.length;
+    const defaultX = 80 + (count % 6) * 28;
+    const defaultY = 50 + (count % 6) * 22;
 
     const newWindow = {
       id: `${appId}-${Date.now()}`,
@@ -99,8 +101,8 @@ export const useWindowStore = create((set, get) => ({
       // 🔥 CRITICAL FIX (THIS WAS MISSING)
       data: options.data || null,
 
-      x: 80 + (count % 6) * 28,
-      y: 50 + (count % 6) * 22,
+      x: options.x !== undefined ? options.x : defaultX,
+      y: options.y !== undefined ? options.y : defaultY,
       width: defaults.width,
       height: defaults.height,
       isMinimized: false,
